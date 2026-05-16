@@ -409,7 +409,7 @@ function startLocate() {
     const isAtBottom = feed.scrollTop + feed.clientHeight >= feed.scrollHeight - 5;
     if (isAtBottom && startTouchY - e.touches[0].pageY > 50) {
       isToastLocked = true;
-      showToast('没有更多了');
+      showToast('附近没有更多了');
       setTimeout(() => { isToastLocked = false; }, 3000);
     }
   }, { passive: true });
