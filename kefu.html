@@ -47,6 +47,10 @@
     .me .bubble-txt { background: #95ec69; color: #000; }
     .me .bubble-txt::before { content: ""; position: absolute; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid #95ec69; right: -8px; top: 14px; }
 
+    /* ── 新增：链接样式 ── */
+    .bubble-txt a { color: #1677FF; text-decoration: underline; word-break: break-all; }
+    .me .bubble-txt a { color: #0a5fd1; }
+
     .msg-img-wrap { max-width: 160px; margin: 0; }
     .msg-img { width: 100%; border-radius: 4px; cursor: pointer; display: block; border: 0.5px solid #dcdcdc; }
 
@@ -59,7 +63,6 @@
     textarea { flex: 1; min-height: 38px; max-height: 120px; border: none; background: #fff; border-radius: 6px; padding: 8px 12px; font-size: 16px; outline: none; resize: none; -webkit-appearance: none; caret-color: #07c160; }
     .btn-send { background: #07c160; color: #fff; border: none; border-radius: 4px; padding: 0 15px; height: 36px; font-size: 15px; cursor: pointer; flex-shrink: 0; margin-bottom: 1px; }
 
-    /* Toast 提示 */
     #toast {
         position: fixed; top: calc(60px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
         background: rgba(0,0,0,0.72); color: #fff; padding: 7px 18px;
@@ -105,11 +108,62 @@
     localStorage.setItem('wx_uid', myId);
 
     let ws;
+    let myLocation = null; // ── 新增：位置字符串，随每条消息发出
+
     const chatContainer = document.getElementById('chat');
     const chatInner = document.getElementById('chat-inner');
     const iptBox = document.getElementById('ipt');
     const fileIpt = document.getElementById('file-ipt');
     const statusBar = document.getElementById('status-bar');
+
+    // ══════════════════════════════════════════════════════
+    // 新增①：腾讯地图 IP 定位（JSONP，不影响主流程）
+    // 把下面的 Key 换成你自己的腾讯地图 WebService Key
+    // ══════════════════════════════════════════════════════
+    const LBS_KEY = 'YOUR_TENCENT_MAP_KEY'; // ← 换成你的 Key
+
+    window.handleLbs = function(res) {
+        try {
+            const info = res && res.result && res.result.ad_info;
+            if (!info) return;
+            const parts = [info.province, info.city, info.district].filter(Boolean);
+            // 去重（直辖市省市名相同时只保留一个）
+            const unique = parts.reduce((acc, cur) => {
+                if (!acc.length || acc[acc.length - 1] !== cur) acc.push(cur);
+                return acc;
+            }, []);
+            myLocation = unique.join('');
+        } catch(e) {}
+    };
+
+    (function() {
+        const s = document.createElement('script');
+        s.src = 'https://apis.map.qq.com/ws/location/v1/ip?key=' + LBS_KEY + '&output=jsonp&callback=handleLbs';
+        s.onerror = function() {}; // 静默失败，不影响聊天
+        document.head.appendChild(s);
+    })();
+    // ══════════════════════════════════════════════════════
+
+    // ══════════════════════════════════════════════════════
+    // 新增②：链接渲染（把 URL 和 [文字](url) 转成可点击 <a>）
+    // ══════════════════════════════════════════════════════
+    function renderTextWithLinks(text) {
+        if (!text) return '';
+        let s = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        // [文字](url) 格式
+        s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+            (_, label, url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+        // 裸 URL
+        s = s.replace(/(https?:\/\/[^\s\u4e00-\u9fa5，。！？、；：""''【】《》（）&<>]+)/g, url => {
+            const clean = url.replace(/[.,!?;:'")\]]+$/, '');
+            return `<a href="${clean}" target="_blank" rel="noopener noreferrer">${clean}</a>`;
+        });
+        return s;
+    }
+    // ══════════════════════════════════════════════════════
 
     // ── 修复：使用 addEventListener 解决重复选择同张图片无法发送的问题 ──
     fileIpt.addEventListener('change', function () {
@@ -190,7 +244,8 @@
         } else {
             const txt = document.createElement('div');
             txt.className = 'bubble-txt';
-            txt.innerText = m.text;
+            // ── 修改：渲染链接（原来是 txt.innerText = m.text）──
+            txt.innerHTML = renderTextWithLinks(m.text);
             div.appendChild(txt);
         }
 
@@ -234,7 +289,8 @@
                 const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
                 
                 if (isConnected()) {
-                    ws.send(JSON.stringify({ from: myId, to: 'admin', text: compressedBase64, type: 'img' }));
+                    // ── 修改：加上 location 字段 ──
+                    ws.send(JSON.stringify({ from: myId, to: 'admin', text: compressedBase64, type: 'img', location: myLocation }));
                 } else {
                     showToast('发送失败，请重试');
                 }
@@ -258,7 +314,8 @@
         }
 
         try {
-            ws.send(JSON.stringify({ from: myId, to: 'admin', text: text, type: 'text' }));
+            // ── 修改：加上 location 字段 ──
+            ws.send(JSON.stringify({ from: myId, to: 'admin', text: text, type: 'text', location: myLocation }));
             iptBox.value = '';
             iptBox.style.height = '38px';
             scrollToBottom();
