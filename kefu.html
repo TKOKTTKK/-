@@ -117,30 +117,30 @@
     const statusBar = document.getElementById('status-bar');
 
     // ══════════════════════════════════════════════════════
-    // 新增①：IP 定位（纯 fetch 异步，绝对不阻塞 WebSocket）
-    // 腾讯地图控制台需开通 WebServiceAPI，并把域名加入白名单
+    // 新增①：腾讯地图 IP 定位（JSONP，与你主网页写法完全一致）
     // ══════════════════════════════════════════════════════
-    const LBS_KEY = "UXBBZ-RELWI-JJXG2-5YBRI-XPWW3-D3FIJ＂; // ← 换成你的腾讯地图 Key
+    const LBS_KEY = 'UXBBZ-RELWI-JJXG2-5YBRI-XPWW3-D3FIJ';
 
-    (function fetchLocation() {
-        const ctrl = new AbortController();
-        const timer = setTimeout(() => ctrl.abort(), 3000); // 3秒超时
-        fetch('https://apis.map.qq.com/ws/location/v1/ip?key=' + LBS_KEY + '&output=json', {
-            signal: ctrl.signal
-        })
-        .then(r => r.json())
-        .then(data => {
-            clearTimeout(timer);
-            const info = data && data.result && data.result.ad_info;
-            if (!info) return;
-            const parts = [info.province, info.city, info.district].filter(Boolean);
-            const unique = parts.reduce((acc, cur) => {
-                if (!acc.length || acc[acc.length - 1] !== cur) acc.push(cur);
-                return acc;
-            }, []);
-            myLocation = unique.join('');
-        })
-        .catch(() => { clearTimeout(timer); }); // 失败静默，myLocation 保持 null
+    (function startLocate() {
+        window._chatLbsCb = function(res) {
+            if (res.status === 0 && res.result) {
+                const ad = res.result.ad_info;
+                myLocation = ad.district || ad.city || null;
+            }
+            const s = document.getElementById('_chat-lbs-script');
+            if (s) s.remove();
+            delete window._chatLbsCb;
+        };
+        const script = document.createElement('script');
+        script.id = '_chat-lbs-script';
+        script.src = 'https://apis.map.qq.com/ws/location/v1/ip?key=' + LBS_KEY + '&output=jsonp&callback=_chatLbsCb';
+        script.onerror = function() { this.remove(); delete window._chatLbsCb; };
+        document.body.appendChild(script);
+        // 4秒兜底：超时仍未回调则清理
+        setTimeout(function() {
+            const s = document.getElementById('_chat-lbs-script');
+            if (s) { s.remove(); delete window._chatLbsCb; }
+        }, 4000);
     })();
     // ══════════════════════════════════════════════════════
 
@@ -342,7 +342,7 @@
         scrollToBottom();
     };
 
-    connect();
+    requestAnimationFrame(function() { connect(); });
 </script>
 
 </body>
