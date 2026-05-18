@@ -117,30 +117,30 @@
     const statusBar = document.getElementById('status-bar');
 
     // ══════════════════════════════════════════════════════
-    // 新增①：腾讯地图 IP 定位（JSONP，不影响主流程）
-    // 把下面的 Key 换成你自己的腾讯地图 WebService Key
+    // 新增①：IP 定位（纯 fetch 异步，绝对不阻塞 WebSocket）
+    // 腾讯地图控制台需开通 WebServiceAPI，并把域名加入白名单
     // ══════════════════════════════════════════════════════
-    const LBS_KEY =＇UXBBZ-RELWI-JJXG2-5YBRI-XPWW3-D3FIJ'; // ← 换成你的 Key
+    const LBS_KEY = ＇UXBBZ-RELWI-JJXG2-5YBRI-XPWW3-D3FIJ'; // ← 换成你的腾讯地图 Key
 
-    window.handleLbs = function(res) {
-        try {
-            const info = res && res.result && res.result.ad_info;
+    (function fetchLocation() {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 3000); // 3秒超时
+        fetch('https://apis.map.qq.com/ws/location/v1/ip?key=' + LBS_KEY + '&output=json', {
+            signal: ctrl.signal
+        })
+        .then(r => r.json())
+        .then(data => {
+            clearTimeout(timer);
+            const info = data && data.result && data.result.ad_info;
             if (!info) return;
             const parts = [info.province, info.city, info.district].filter(Boolean);
-            // 去重（直辖市省市名相同时只保留一个）
             const unique = parts.reduce((acc, cur) => {
                 if (!acc.length || acc[acc.length - 1] !== cur) acc.push(cur);
                 return acc;
             }, []);
             myLocation = unique.join('');
-        } catch(e) {}
-    };
-
-    (function() {
-        const s = document.createElement('script');
-        s.src = 'https://apis.map.qq.com/ws/location/v1/ip?key=' + LBS_KEY + '&output=jsonp&callback=handleLbs';
-        s.onerror = function() {}; // 静默失败，不影响聊天
-        document.head.appendChild(s);
+        })
+        .catch(() => { clearTimeout(timer); }); // 失败静默，myLocation 保持 null
     })();
     // ══════════════════════════════════════════════════════
 
