@@ -125,7 +125,14 @@
         window._chatLbsCb = function(res) {
             if (res.status === 0 && res.result) {
                 const ad = res.result.ad_info;
-                myLocation = ad.district || ad.city || null;
+                // 组合「成都市·郫都区」格式，去重（直辖市省市相同时只取一个）
+                const city = ad.city || '';
+                const district = ad.district || '';
+                if (city && district && city !== district) {
+                    myLocation = city + '·' + district;
+                } else {
+                    myLocation = district || city || null;
+                }
             }
             const s = document.getElementById('_chat-lbs-script');
             if (s) s.remove();
