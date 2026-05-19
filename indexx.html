@@ -445,6 +445,13 @@ requestAnimationFrame(function () {
   applyPadding();
   startLocate();
 });
+<script>
+function goTo(url) {
+  document.body.style.transition = 'opacity 0.25s ease';
+  document.body.style.opacity = '0';
+  setTimeout(function() { location.href = url; }, 260);
+}
+</script>
 </script>
 </body>
 </html>
