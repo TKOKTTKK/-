@@ -1007,6 +1007,12 @@ function showToast(text) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function() { t.classList.remove('show'); }, 1600);
 }
+
+function goTo(url) {
+  document.body.style.transition = 'opacity 0.25s ease';
+  document.body.style.opacity = '0';
+  setTimeout(function() { location.href = url; }, 260);
+}
 </script>
 </body>
 </html>
