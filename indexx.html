@@ -170,8 +170,9 @@ opacity:0; pointer-events:none; transition:opacity 0.25s; z-index:5001;
 #preview-overlay.active .preview-arrow { opacity:1; pointer-events:auto; }
 #arrow-prev { left:max(12px, env(safe-area-inset-left, 12px)); }
 #arrow-next { right:max(12px, env(safe-area-inset-right, 12px)); }
+body { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 </style>
-
 </head>
 <body>
 
@@ -194,7 +195,7 @@ opacity:0; pointer-events:none; transition:opacity 0.25s; z-index:5001;
 <div id="feed"></div>
 
 <div class="tab-bar">
-  <div class="tab-item" onclick="showToast('开通会员使用')"><span class="tab-label">首页</span></div>
+  <div class="tab-item" onclick="goTo('cc.html')"><span class="tab-label">首页</span></div>
   <div class="tab-item active"><span class="tab-label">同城</span></div>
   <div class="tab-publish" onclick="showToast('开通会员使用')"><div class="pub-inner">+</div></div>
   <div class="tab-item" onclick="showToast('开通会员使用')"><span class="tab-label">消息</span></div>
@@ -447,6 +448,10 @@ requestAnimationFrame(function () {
   startLocate();
 });
 </script>
-
+function goTo(url) {
+  document.body.style.transition = 'opacity 0.25s ease';
+  document.body.style.opacity = '0';
+  setTimeout(function() { location.href = url; }, 260);
+}
 </body>
 </html>
