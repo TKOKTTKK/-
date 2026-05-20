@@ -731,7 +731,7 @@ body {
 ════════════════════════════════════════════════════════════ -->
 
 <!-- ===== 首页 ===== -->
-<div class="page-container active" id="page-home">
+<div class="page-container" id="page-home">
   <div id="feed-home">
     <div class="video-item product-page" data-page-type="content" id="productPage1">
       <div class="page-glow"></div>
@@ -870,7 +870,7 @@ body {
 </div>
 
 <!-- ===== 同城页 ===== -->
-<div class="page-container" id="page-city">
+<div class="page-container active" id="page-city">
   <div id="feed-city"></div>
 </div>
 
@@ -1031,8 +1031,8 @@ body {
 
 <!-- 底部 Tab 栏 -->
 <div class="tab-bar">
-  <div class="tab-item active" data-page="home"    onclick="switchPage('home')"><span class="tab-label">首页</span></div>
-  <div class="tab-item"        data-page="city"    onclick="switchPage('city')"><span class="tab-label">同城</span></div>
+  <div class="tab-item" data-page="home"    onclick="switchPage('home')"><span class="tab-label">首页</span></div>
+  <div class="tab-item active" data-page="city" onclick="switchPage('city')"><span class="tab-label">同城</span></div>
   <div class="tab-publish" onclick="showToast('开通会员使用')"><div class="pub-inner">+</div></div>
   <div class="tab-item"        data-page="message" onclick="switchPage('message')"><span class="tab-label">消息</span></div>
   <div class="tab-item"        data-page="me"      onclick="switchPage('me')"><span class="tab-label">我</span></div>
@@ -1081,7 +1081,7 @@ function showToast(t) {
 /* ════════════════════════════════════════════════════════════
    多页面切换
 ════════════════════════════════════════════════════════════ */
-var currentPage = 'home';
+var currentPage = 'city';
 
 function switchPage(pageId) {
   if (currentPage === pageId) return;
