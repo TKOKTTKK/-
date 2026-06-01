@@ -437,6 +437,87 @@ body {
   text-align:center; flex-shrink:0;
 }
 
+
+/* ════════════════════════════════════════════════════════════
+   试看结束遮罩
+════════════════════════════════════════════════════════════ */
+.trial-mask {
+  position:absolute; inset:0; z-index:50;
+  background:rgba(0,0,0,0.92);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.35s ease;
+}
+.trial-mask.show {
+  opacity:1; pointer-events:auto;
+}
+.trial-icon {
+  width:58px; height:58px; margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(250,195,0,0.18),rgba(255,140,0,0.12));
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:1.5px solid rgba(250,195,0,0.35);
+}
+.trial-icon svg { width:28px; height:28px; fill:#fac300; }
+.trial-title {
+  font-size:18px; font-weight:700; color:#fff;
+  text-align:center; line-height:1.5; margin-bottom:6px;
+  letter-spacing:0.3px;
+}
+.trial-sub {
+  font-size:13px; color:rgba(255,255,255,0.42);
+  margin-bottom:28px; text-align:center;
+}
+/* 金色渐变主按钮 */
+.trial-vip-btn {
+  width:220px; height:50px;
+  background:linear-gradient(130deg,#f5c518 0%,#ffaa00 50%,#f5c518 100%);
+  background-size:200% 100%;
+  border:none; border-radius:100px;
+  color:#1a0e00; font-size:16px; font-weight:800;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px;
+  box-shadow:0 8px 28px rgba(245,197,24,0.45);
+  animation:trialBtnShift 2.8s linear infinite, trialBtnPulse 2s ease-in-out infinite;
+  -webkit-appearance:none; margin-bottom:16px;
+  position:relative; overflow:hidden;
+}
+.trial-vip-btn::after {
+  content:''; position:absolute; top:0; left:-100%; width:50%; height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  animation:trialBtnShine 2.2s ease-in-out infinite;
+}
+@keyframes trialBtnShift { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+@keyframes trialBtnPulse { 0%,100%{transform:scale(1);box-shadow:0 8px 28px rgba(245,197,24,0.45);} 50%{transform:scale(1.03);box-shadow:0 12px 38px rgba(245,197,24,0.65);} }
+@keyframes trialBtnShine { 0%{left:-100%} 45%{left:140%} 100%{left:140%} }
+.trial-vip-btn svg { width:17px; height:17px; fill:#1a0e00; flex-shrink:0; }
+
+/* 重新试看链接 */
+.trial-replay-btn {
+  display:flex; align-items:center; gap:5px;
+  color:rgba(255,255,255,0.5); font-size:13.5px;
+  cursor:pointer; background:none; border:none;
+  -webkit-appearance:none; padding:4px 8px;
+  transition:color 0.15s;
+  margin-bottom:14px;
+}
+.trial-replay-btn:active { color:rgba(255,255,255,0.85); }
+.trial-replay-btn svg { width:14px; height:14px; }
+
+/* 上滑继续 */
+.trial-swipe-btn {
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  color:rgba(255,255,255,0.32); font-size:12px;
+  cursor:pointer; background:none; border:none;
+  -webkit-appearance:none; padding:4px 8px;
+  transition:color 0.15s;
+  animation:trialSwipeBounce 1.5s ease-in-out infinite;
+}
+.trial-swipe-btn:active { color:rgba(255,255,255,0.7); }
+.trial-swipe-btn svg { width:18px; height:18px; }
+@keyframes trialSwipeBounce {
+  0%,100%{ transform:translateY(0); }
+  50%    { transform:translateY(-4px); }
+}
 </style>
 </head>
 <body>
@@ -507,71 +588,6 @@ body {
 
 <div class="page-container active" id="page-home">
   <div id="feed-home">
-    <div class="video-item product-page" data-page-type="content" id="productPage1">
-      <div class="page-glow"></div>
-      <div class="page-scroll"><div class="page-body">
-        <div class="page-category">会员介绍</div>
-        <div class="page-title">20元开通会员</div>
-        <div class="page-desc">会员权益</div>
-        <div class="page-divider"></div>
-        <div class="feature-list">
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div><div class="feature-text"><b>海量视频</b>解锁全部完整版视频</div></div>
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div><div class="feature-text"><b>每天更新</b>每天更新超多新片</div></div>
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div><div class="feature-text"><b>永久会员</b>一次开通 终身使用</div></div>
-        </div>
-        <button class="page-cta" onclick="location.href='kefu.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>联系客服开通会员</button>
-        <button class="page-sub-btn" onclick="continueFeed()"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>上滑继续浏览</button>
-        <div class="page-note"></div>
-      </div></div>
-    </div>
-    <div class="video-item service-page" data-page-type="content" id="servicePage1">
-      <div class="page-glow"></div>
-      <div class="page-scroll"><div class="page-body">
-        <div class="page-category">健身会员</div>
-        <div class="page-title">20元开通会员</div>
-        <div class="page-desc">会员权益</div>
-        <div class="page-divider"></div>
-        <div class="feature-list">
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div><div class="feature-text"><b>完整视频</b>解锁全部完整视频</div></div>
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div><div class="feature-text"><b>海量更新</b>每天更新超多视频</div></div>
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z"/></svg></div><div class="feature-text"><b>永久有效</b>一次开通 终身使用</div></div>
-        </div>
-        <button class="page-cta" onclick="location.href='kefu.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>联系客服开通会员</button>
-        <button class="page-sub-btn" onclick="continueFeed()"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>上滑继续浏览</button>
-        <div class="page-note"></div>
-      </div></div>
-    </div>
-    <div class="video-item case-page" data-page-type="content" id="casePage1">
-      <div class="page-glow"></div>
-      <div class="page-scroll"><div class="page-body">
-        <div class="page-desc">来自用户的真实反馈</div>
-        <div class="page-divider"></div>
-        <div class="case-list">
-          <div class="case-card"><div class="case-header"><div class="case-avatar"><svg viewBox="0 0 34 34"><rect width="34" height="34" fill="#2a1a3e"/><ellipse cx="17" cy="22" rx="10" ry="8" fill="#f5c5a3"/><ellipse cx="17" cy="15" rx="8" ry="9" fill="#f5c5a3"/><ellipse cx="17" cy="10" rx="9" ry="6" fill="#1a1a1a"/></svg></div><div><div class="case-name">小李· 上海</div><div class="case-tag">使用3个月</div></div></div><div class="case-stars">★★★★★</div><div class="case-quote">使用太方便了</div></div>
-          <div class="case-card"><div class="case-header"><div class="case-avatar"><svg viewBox="0 0 34 34"><rect width="34" height="34" fill="#1a2e1a"/><ellipse cx="17" cy="22" rx="10" ry="8" fill="#f0c8a0"/><ellipse cx="17" cy="15" rx="8" ry="9" fill="#f0c8a0"/><ellipse cx="17" cy="10" rx="9" ry="6" fill="#1a3a1a"/></svg></div><div><div class="case-name">阿伟· 深圳</div><div class="case-tag">使用6个月</div></div></div><div class="case-stars">★★★★★</div><div class="case-quote">挺好用的</div></div>
-        </div>
-        <button class="page-cta" onclick="location.href='kefu.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>联系客服开通会员</button>
-        <button class="page-sub-btn" onclick="continueFeed()"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>上滑继续浏览</button>
-        <div class="page-note"></div>
-      </div></div>
-    </div>
-    <div class="video-item detail-page" data-page-type="content" id="detailPage1">
-      <div class="page-glow"></div>
-      <div class="page-scroll"><div class="page-body">
-        <div class="page-category">会员介绍</div>
-        <div class="page-title">20元开通会员</div>
-        <div class="page-desc">会员权益</div>
-        <div class="page-divider"></div>
-        <div class="feature-list">
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="feature-text"><b>完整视频</b>解锁全部完整视频</div></div>
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div><div class="feature-text"><b>海量视频</b>超级多视频+每天海量更新</div></div>
-          <div class="feature-item"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="feature-text"><b>永久有效</b>一次开通 终身使用</div></div>
-        </div>
-        <button class="page-cta" onclick="location.href='kefu.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>联系客服开通会员</button>
-        <button class="page-sub-btn" onclick="continueFeed()"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>上滑继续浏览</button>
-        <div class="page-note"></div>
-      </div></div>
-    </div>
   </div>
 </div>
 
@@ -703,24 +719,45 @@ function showHomeHUD(){sideBar.classList.remove('hud-hidden');videoInfo.classLis
 function hideHomeHUD(){sideBar.classList.add('hud-hidden');videoInfo.classList.add('hud-hidden');progBar.classList.add('hud-hidden');}
 
 var videoUrls=["https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/-4019395333164526404.MOV","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/-3781959715086345855.MOV","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/-6379702098700230058%202.mov","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/-6779541056753888434.MOV","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/1269460333534029679.mov","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/2359351461684170274%202.mov","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/3416633459902580349.MOV","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/4823082387013161205%202.MP4","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/copy_54D0A817-8486-49DA-ACFD-876FEED639A5%202.mov","https://pub-bd77bd83901245459c0a9fac4a491765.r2.dev/TK/copy_ACF8CEE6-8CA6-4756-968A-63B55DD99FB8.mov"];
-var feedPlan=[{type:'video',idx:0},{type:'video',idx:1},{type:'video',idx:2},{type:'content',id:'productPage1'},{type:'video',idx:3},{type:'video',idx:4},{type:'video',idx:5},{type:'content',id:'servicePage1'},{type:'video',idx:6},{type:'video',idx:7},{type:'content',id:'casePage1'},{type:'video',idx:8},{type:'video',idx:9},{type:'content',id:'detailPage1'}];
+var feedPlan=[{type:'video',idx:0},{type:'video',idx:1},{type:'video',idx:2},{type:'video',idx:3},{type:'video',idx:4},{type:'video',idx:5},{type:'video',idx:6},{type:'video',idx:7},{type:'video',idx:8},{type:'video',idx:9}];
 var feedHome=document.getElementById('feed-home'),homeAllSections=[],homeVideoEls=[],homeSecTypes=[],homeVideoIdxMap=[],homeCurrentVidIdx=0;
 feedPlan.forEach(function(plan){if(plan.type==='video'){var sec=buildHomeVideoSection(plan.idx);homeAllSections.push(sec.section);homeVideoEls.push(sec.video);homeSecTypes.push('video');homeVideoIdxMap.push(plan.idx);}else{var el=document.getElementById(plan.id);homeAllSections.push(el);homeSecTypes.push('content');homeVideoIdxMap.push(-1);}});
 homeAllSections.forEach(function(sec){feedHome.appendChild(sec);});
 var homeEndEl=document.createElement('div');homeEndEl.className='video-item end-page';homeEndEl.innerHTML='<svg style="width:56px;height:56px;opacity:.4" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"/></svg><div class="end-title">你还不是会员 无法继续观看</div><div class="end-sub">请联系客服开通会员解锁全部功能和视频</div>';
 feedHome.appendChild(homeEndEl);
-function buildHomeVideoSection(vidIdx){var sec=document.createElement('div');sec.className='video-item is-video';var skel=document.createElement('div');skel.className='skeleton';var vid=document.createElement('video');vid.className='feed-video';vid.loop=true;vid.playsInline=true;vid.muted=true;vid.setAttribute('playsinline','');vid.setAttribute('webkit-playsinline','');vid.setAttribute('x5-video-player-type','h5');vid.setAttribute('x5-video-player-fullscreen','false');vid.setAttribute('x5-playsinline','');vid.setAttribute('preload','metadata');var pauseMask=document.createElement('div');pauseMask.className='pause-mask';pauseMask.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';var bufRing=document.createElement('div');bufRing.className='buf-ring';vid.addEventListener('canplay',function(){skel.classList.add('gone');setTimeout(function(){if(skel.parentNode)skel.remove();},400);});vid.addEventListener('playing',function(){sec.classList.remove('is-buffering');if(!isMuted)vid.muted=false;});vid.addEventListener('waiting',function(){sec.classList.add('is-buffering');});vid.addEventListener('canplaythrough',function(){sec.classList.remove('is-buffering');});sec.appendChild(vid);sec.appendChild(skel);sec.appendChild(pauseMask);sec.appendChild(bufRing);return{section:sec,video:vid};}
+function buildHomeVideoSection(vidIdx){var sec=document.createElement('div');sec.className='video-item is-video';var skel=document.createElement('div');skel.className='skeleton';var vid=document.createElement('video');vid.className='feed-video';vid.loop=false;vid.playsInline=true;vid.muted=true;vid.setAttribute('playsinline','');vid.setAttribute('webkit-playsinline','');vid.setAttribute('x5-video-player-type','h5');vid.setAttribute('x5-video-player-fullscreen','false');vid.setAttribute('x5-playsinline','');vid.setAttribute('preload','metadata');var pauseMask=document.createElement('div');pauseMask.className='pause-mask';pauseMask.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';var bufRing=document.createElement('div');bufRing.className='buf-ring';vid.addEventListener('canplay',function(){skel.classList.add('gone');setTimeout(function(){if(skel.parentNode)skel.remove();},400);});vid.addEventListener('playing',function(){sec.classList.remove('is-buffering');if(!isMuted)vid.muted=false;});vid.addEventListener('waiting',function(){sec.classList.add('is-buffering');});vid.addEventListener('canplaythrough',function(){sec.classList.remove('is-buffering');});
+/* 试看结束遮罩 */
+var trialMask=document.createElement('div');
+trialMask.className='trial-mask';
+trialMask.innerHTML=
+  '<div class="trial-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>'+
+  '<div class="trial-title">试看结束<br>会员解锁完整版</div>'+
+  '<div class="trial-sub">永久会员 · 仅需20元</div>'+
+  '<button class="trial-vip-btn" onclick="openKefuDrawer()">'+
+    '<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>'+
+    '开通会员观看'+
+  '</button>'+
+  '<button class="trial-replay-btn" onclick="trialReplay(this)">'+
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>'+
+    '重新试看'+
+  '</button>'+
+  '<button class="trial-swipe-btn" onclick="trialSwipeNext(this)">'+
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>'+
+    '上滑浏览下一个'+
+  '</button>';
+vid.addEventListener('ended',function(){ trialMask.classList.add('show'); sec.classList.add('is-paused'); });
+sec.appendChild(vid);sec.appendChild(skel);sec.appendChild(pauseMask);sec.appendChild(bufRing);sec.appendChild(trialMask);return{section:sec,video:vid};}
 var isMuted=true,muteBar=document.getElementById('muteBar'),muteTimer;
 function showMuteBar(){if(!isMuted)return;muteBar.classList.add('show');clearTimeout(muteTimer);muteTimer=setTimeout(function(){muteBar.classList.remove('show');},2500);}
 function unmuteAll(){if(!isMuted)return;isMuted=false;muteBar.classList.remove('show');homeVideoEls.forEach(function(v){v.muted=false;});}
 function homePreload(vidIdx){homeVideoEls.forEach(function(v,i){var d=Math.abs(i-vidIdx);if(d<=3){if(!v.src){v.src=videoUrls[i];v.load();}}else if(d>=15){if(v.src){v.pause();v.removeAttribute('src');v.load();}}});}
 var homeProgTimer;
 function startHomeProgress(v){clearInterval(homeProgTimer);progFill.style.transition='none';progFill.style.width='0%';requestAnimationFrame(function(){progFill.style.transition='width 0.3s linear';homeProgTimer=setInterval(function(){if(v.duration)progFill.style.width=(v.currentTime/v.duration*100)+'%';},300);});}
-var homeObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){var sIdx=homeAllSections.indexOf(entry.target);if(sIdx===-1)return;var type=homeSecTypes[sIdx],vIdx=homeVideoIdxMap[sIdx];if(entry.isIntersecting){if(type==='content'){homeVideoEls.forEach(function(v){v.pause();});if(currentPage==='home')hideHomeHUD();clearInterval(homeProgTimer);progFill.style.width='0%';}else{homeCurrentVidIdx=vIdx;var v=homeVideoEls[vIdx];if(!v.src)v.src=videoUrls[vIdx];v.currentTime=0;v.muted=isMuted;if(currentPage==='home'){v.play().catch(function(){});showHomeHUD();startHomeProgress(v);}entry.target.classList.remove('is-paused');homePreload(vIdx);if(vIdx===0)setTimeout(showMuteBar,800);}}else{if(type==='video'){var v2=homeVideoEls[vIdx];v2.pause();if(Math.abs(vIdx-homeCurrentVidIdx)>1)v2.currentTime=0;entry.target.classList.remove('is-paused','is-buffering');}}});},{threshold:0.55});
+var homeObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){var sIdx=homeAllSections.indexOf(entry.target);if(sIdx===-1)return;var type=homeSecTypes[sIdx],vIdx=homeVideoIdxMap[sIdx];if(entry.isIntersecting){if(type==='content'){homeVideoEls.forEach(function(v){v.pause();});if(currentPage==='home')hideHomeHUD();clearInterval(homeProgTimer);progFill.style.width='0%';}else{homeCurrentVidIdx=vIdx;var v=homeVideoEls[vIdx];if(!v.src)v.src=videoUrls[vIdx];v.currentTime=0;v.muted=isMuted;if(currentPage==='home'){v.play().catch(function(){});showHomeHUD();startHomeProgress(v);}entry.target.classList.remove('is-paused');homePreload(vIdx);if(vIdx===0)setTimeout(showMuteBar,800);}}else{if(type==='video'){var v2=homeVideoEls[vIdx];v2.pause();if(Math.abs(vIdx-homeCurrentVidIdx)>1)v2.currentTime=0;entry.target.classList.remove('is-paused','is-buffering');/* 滑走时隐藏试看遮罩，下次滑回重新完整试看 */var tm=entry.target.querySelector('.trial-mask');if(tm){tm.classList.remove('show');}}}});},{threshold:0.55});
 homeAllSections.forEach(function(s){homeObserver.observe(s);});
 homeObserver.observe(homeEndEl);
 homePreload(0);
-feedHome.addEventListener('click',function(e){if(e.target.closest('.side-bar,.top-nav,.tab-bar,.video-info,.product-page,.service-page,.case-page,.detail-page'))return;var sec=e.target.closest('.is-video');if(!sec)return;var sIdx=homeAllSections.indexOf(sec);if(sIdx===-1)return;var v=homeVideoEls[homeVideoIdxMap[sIdx]];if(!v)return;if(isMuted){unmuteAll();if(v.paused)v.play().catch(function(){});return;}if(v.paused){v.play();sec.classList.remove('is-paused');}else{v.pause();sec.classList.add('is-paused');}});
+feedHome.addEventListener('click',function(e){if(e.target.closest('.side-bar,.top-nav,.tab-bar,.video-info,.product-page,.service-page,.case-page,.detail-page,.trial-mask'))return;var sec=e.target.closest('.is-video');if(!sec)return;var sIdx=homeAllSections.indexOf(sec);if(sIdx===-1)return;var v=homeVideoEls[homeVideoIdxMap[sIdx]];if(!v)return;if(isMuted){unmuteAll();if(v.paused)v.play().catch(function(){});return;}if(v.paused){v.play();sec.classList.remove('is-paused');}else{v.pause();sec.classList.add('is-paused');}});
 feedHome.addEventListener('touchstart',function(){if(isMuted)unmuteAll();},{passive:true});
 var lastTap=0;
 feedHome.addEventListener('touchend',function(e){if(e.target.closest('.side-bar,.top-nav,.tab-bar,.video-info,.product-page,.service-page,.case-page,.detail-page'))return;if(!e.target.closest('.is-video'))return;var now=Date.now();if(now-lastTap<280){var touch=e.changedTouches[0];spawnHeart(touch.pageX,touch.pageY);if(!liked)toggleLike();}lastTap=now;});
@@ -729,6 +766,23 @@ var liked=false;function toggleLike(){liked=!liked;var icon=document.getElementB
 var favorited=false;function toggleFavorite(){favorited=!favorited;var icon=document.getElementById('starIcon');icon.setAttribute('fill',favorited?'#fac300':'#fff');icon.style.transform='scale(1.3)';setTimeout(function(){icon.style.transform='';},200);}
 function handleFollow(e){e.stopPropagation();document.getElementById('followBtn').classList.add('gone');showToast('已关注');}
 function continueFeed(){feedHome.scrollTo({top:feedHome.scrollTop+window.innerHeight,behavior:'smooth'});}
+function trialReplay(btn){
+  var mask=btn.closest('.trial-mask');
+  var sec=mask.closest('.video-item');
+  var vid=sec.querySelector('video');
+  mask.classList.remove('show');
+  sec.classList.remove('is-paused');
+  vid.currentTime=0;
+  vid.muted=isMuted;
+  /* 直接调用 play()，此时在用户点击事件栈内，浏览器允许非静音播放 */
+  vid.play().catch(function(){});
+}
+function trialSwipeNext(btn){
+  var sec=btn.closest('.video-item');
+  var mask=btn.closest('.trial-mask');
+  mask.classList.remove('show');
+  feedHome.scrollTo({top:feedHome.scrollTop+window.innerHeight,behavior:'smooth'});
+}
 setHomeHUD(true);
 setTimeout(showMuteBar,1000);
 
@@ -799,7 +853,7 @@ requestAnimationFrame(function(){applyTopPaddingCity();startLocate();});
           </svg>
         </div>
         <div class="benefit-text">
-          <span class="benefit-name">加入QQ会员群20元</span>
+          <span class="benefit-name">20元加入QQ会员群</span>
           <span class="benefit-sub"></span>
         </div>
       </div>
@@ -827,7 +881,7 @@ requestAnimationFrame(function(){applyTopPaddingCity();startLocate();});
         </div>
         <div class="benefit-text">
           <span class="benefit-name">解锁本站全部完整版</span>
-          <span class="benefit-sub">本站已有十万多部资源 每天更新资源</span>
+          <span class="benefit-sub">本站已有十万多部资源 每天持续更新</span>
         </div>
       </div>
     </div>
