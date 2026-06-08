@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <script>
-        (function () {
-            var ua = navigator.userAgent;
+   <meta charset="UTF-8">
+   <script>
+       (function () {
+           var ua = navigator.userAgent;
 
-            // ✅ 会劫持视频的浏览器/App WebView
-            var hijack = /QQBrowser|MQQBrowser|QBWebViewUA|QQ\/|    \/MicroMessenger|UCBrowser|UCWEB|baiduboxapp|BaiduBrowser|baidubrowser|Quark|HuaweiBrowser|MiuiBrowser|OppoBrowser|HeyTapBrowser|VivoBrowser|Weibo|BytedanceWebview|aweme|AlipayClient/i;
+           // 会劫持视频的浏览器
+           var hijack = /QQBrowser|MQQBrowser|QBWebViewUA|QQ\/|UCBrowser|UCWEB|baiduboxapp|BaiduBrowser|baidubrowser|Quark|HuaweiBrowser|MiuiBrowser|OppoBrowser|HeyTapBrowser|VivoBrowser/i;
 
-            window.location.replace(hijack.test(ua) ? "qqllq.html" : "indexx.html");
-        })();
-    </script>
+           window.location.replace(hijack.test(ua) ? "qqllq.html" : "indexx.html");
+       })();
+   </script>
 </head>
 <body></body>
 </html>
