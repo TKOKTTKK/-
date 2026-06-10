@@ -792,7 +792,7 @@ window.MusicManager = (function () {
    首次用户触摸监听
    — 同时监听 touchstart 和 click，确保在 PC / 移动端都能工作
    — 用 capture=true 优先级最高，在任何事件处理之前捕获
-   — 成功后立即移除，避免重复触发
+   — 成功立即移除，避免重复触发
 ══════════════════════════════════════════════════════════════ */
 (function () {
   function _firstInteraction() {
