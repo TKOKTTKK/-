@@ -155,7 +155,7 @@ body {
 .avatar-wrap { width:52px; height:52px; position:relative; margin-bottom:20px; cursor:pointer; }
 .avatar-img  { width:50px; height:50px; border-radius:50%; border:1.8px solid #fff; background:#333; overflow:hidden; }
 .avatar-img svg { width:100%; height:100%; }
-.avatar-plus { position:absolute; bottom:-6px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; transition:opacity 0.25s,transform 0.25s; cursor:pointer; box-shadow:0 1px 4px rgba(254,44,85,0.5); line-height:1; }
+.avatar-plus { position:absolute; bottom:-12px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; transition:opacity 0.25s,transform 0.25s; cursor:pointer; box-shadow:0 1px 4px rgba(254,44,85,0.5); line-height:1; }
 .avatar-plus.gone { opacity:0; pointer-events:none; transform:translateX(-50%) scale(0.5); }
 .side-btn { display:flex; flex-direction:column; align-items:center; margin-bottom:10px; cursor:pointer; }
 .side-btn .icon-wrap { width:45px; height:45px; display:flex; align-items:center; justify-content:center; }
@@ -440,9 +440,9 @@ body {
       <button class="login-btn" id="meLoginBtn" onclick="meHandleLogin()"><span class="btn-text">登 录</span><div class="btn-spinner"></div></button>
       <div class="divider"><div class="divider-line"></div><div class="divider-text">其他方式登录</div><div class="divider-line"></div></div>
       <div class="social-row">
-        <div class="social-btn" onclick="showToast('请先联系客服开通会员账号')"><svg viewBox="0 0 32 32"><path fill="#07C160" d="M12.5 6C7.25 6 3 9.6 3 14.05c0 2.55 1.42 4.82 3.6 6.29l-.9 2.7 3.15-1.58c.85.22 1.74.34 2.65.34.32 0 .63-.02.94-.05a6.65 6.65 0 01-.24-1.78c0-3.78 3.65-6.85 8.15-6.85.28 0 .56.01.84.04C20.62 9 16.95 6 12.5 6z"/><circle fill="#fff" cx="9.5" cy="12" r="1.2"/><circle fill="#fff" cx="15" cy="12" r="1.2"/><path fill="#07C160" d="M28.5 19.25c0-3.46-3.46-6.25-7.75-6.25s-7.75 2.79-7.75 6.25c0 3.45 3.46 6.25 7.75 6.25.85 0 1.66-.11 2.43-.32l2.65 1.45-.74-2.32C26.95 23.18 28.5 21.34 28.5 19.25z"/><circle fill="#fff" cx="18.5" cy="18.5" r="1"/><circle fill="#fff" cx="23" cy="18.5" r="1"/></svg></div>
-        <div class="social-btn" onclick="showToast('请先联系客服开通会员账号')"><svg width="32" height="32" viewBox="15.5 -60.7 992 1152"><path d="m824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3 4.4-185.7-72.8-335.9-250.6-335.9-179.8 0-255.3 153.2-250.5 335.9-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" fill="#1296db"/></svg></div>
-        <div class="social-btn" onclick="showToast('请先联系客服开通会员账号')"><svg viewBox="0 0 32 32"><path fill="#fff" d="M19.2 5.5c.1 1.4-.5 2.8-1.3 3.8-.8 1-2.1 1.7-3.3 1.6-.15-1.35.5-2.75 1.3-3.65.85-.95 2.25-1.7 3.3-1.75z"/><path fill="#fff" d="M22.5 16.5c-.05-3 2.4-4.4 2.5-4.5-1.35-2-3.5-2.25-4.25-2.3-1.8-.2-3.5 1.05-4.4 1.05-.9 0-2.3-1.05-3.8-1.0-1.95.05-3.75 1.15-4.75 2.9-2.05 3.55-.5 8.75 1.45 11.6.95 1.4 2.1 2.95 3.6 2.9 1.45-.05 2-.95 3.75-.95s2.25.95 3.8.9c1.55-.05 2.55-1.4 3.5-2.8 1.1-1.6 1.55-3.15 1.6-3.25-.05-.05-3.05-1.2-3.0-4.55z"/></svg></div>
+        <div class="social-btn" onclick="showToast('请先开通会员')"><svg viewBox="0 0 32 32"><path fill="#07C160" d="M12.5 6C7.25 6 3 9.6 3 14.05c0 2.55 1.42 4.82 3.6 6.29l-.9 2.7 3.15-1.58c.85.22 1.74.34 2.65.34.32 0 .63-.02.94-.05a6.65 6.65 0 01-.24-1.78c0-3.78 3.65-6.85 8.15-6.85.28 0 .56.01.84.04C20.62 9 16.95 6 12.5 6z"/><circle fill="#fff" cx="9.5" cy="12" r="1.2"/><circle fill="#fff" cx="15" cy="12" r="1.2"/><path fill="#07C160" d="M28.5 19.25c0-3.46-3.46-6.25-7.75-6.25s-7.75 2.79-7.75 6.25c0 3.45 3.46 6.25 7.75 6.25.85 0 1.66-.11 2.43-.32l2.65 1.45-.74-2.32C26.95 23.18 28.5 21.34 28.5 19.25z"/><circle fill="#fff" cx="18.5" cy="18.5" r="1"/><circle fill="#fff" cx="23" cy="18.5" r="1"/></svg></div>
+        <div class="social-btn" onclick="showToast('请先开通会员')"><svg width="32" height="32" viewBox="15.5 -60.7 992 1152"><path d="m824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3 4.4-185.7-72.8-335.9-250.6-335.9-179.8 0-255.3 153.2-250.5 335.9-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" fill="#1296db"/></svg></div>
+        <div class="social-btn" onclick="showToast('请先开通会员')"><svg viewBox="0 0 32 32"><path fill="#fff" d="M19.2 5.5c.1 1.4-.5 2.8-1.3 3.8-.8 1-2.1 1.7-3.3 1.6-.15-1.35.5-2.75 1.3-3.65.85-.95 2.25-1.7 3.3-1.75z"/><path fill="#fff" d="M22.5 16.5c-.05-3 2.4-4.4 2.5-4.5-1.35-2-3.5-2.25-4.25-2.3-1.8-.2-3.5 1.05-4.4 1.05-.9 0-2.3-1.05-3.8-1.0-1.95.05-3.75 1.15-4.75 2.9-2.05 3.55-.5 8.75 1.45 11.6.95 1.4 2.1 2.95 3.6 2.9 1.45-.05 2-.95 3.75-.95s2.25.95 3.8.9c1.55-.05 2.55-1.4 3.5-2.8 1.1-1.6 1.55-3.15 1.6-3.25-.05-.05-3.05-1.2-3.0-4.55z"/></svg></div>
       </div>
       <div class="agreement-row">
         <label class="checkbox-wrap"><input type="checkbox" id="meAgreeCheck"><div class="checkbox-custom"><svg viewBox="0 0 12 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,5 4.5,9 11,1"/></svg></div></label>
@@ -888,7 +888,7 @@ function buildImageSection(feedIdx, pageIdx) {
   var curIdx      = 0;
   var autoStopped = false;
   var isPaused    = false;
-  var AUTO_DELAY  = 5000;
+  var AUTO_DELAY  = 3000;
   var showHint    = (feedIdx === 0);
   var autoTimer   = null;
   var isActive    = false;
@@ -1123,7 +1123,7 @@ feedPlan.forEach(function(plan, pageIdx) {
 
 var homeEndEl = document.createElement('div');
 homeEndEl.className = 'video-item end-page';
-homeEndEl.innerHTML = '<svg style="width:56px;height:56px;opacity:.4" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"/></svg><div class="end-title">你还不是会员 无法继续预览</div><div class="end-sub">请点击左下角 ☞立即开通会员 解锁全部视频和功能</div>';
+homeEndEl.innerHTML = '<svg style="width:56px;height:56px;opacity:.4" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"/></svg><div class="end-title">你还不是会员 无法继续观看</div><div class="end-sub">请联系客服开通会员解锁全部功能和视频</div>';
 feedHome.appendChild(homeEndEl);
 
 /* ════ Intersection Observer ════ */
@@ -1146,102 +1146,20 @@ setHomeHUD(true);
 
 /* ════ 同城页 ════ */
 var pagesData=[
-  {name:"宁宁",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1908.AVIF"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1886.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1885.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1901.WEBP"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/-17973596449962424042-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1903.WEBP"}]},
-  {name:"酒儿",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2060.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2059.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2058.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2057.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/1778567919252631-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2065.webp"}]},
-  {name:"小梦",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1912.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1913.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1914.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1915.JPG"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1972.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1956.webp"}]},
-  {name:"西米露",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1977.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1980.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1981.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1992.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/1778444463041937-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1990.webp"}]},
-  {name:"Cc",fee:"400",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1923.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1922.JPG"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1920.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1919.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/1778450346029478-ezgif.com-video-to-webp-converter%204.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1997.webp"}]},
-  {name:"纯甜",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1957.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1958.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1959.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1961.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/1778458514116947-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_2005.webp"}]},
-  {name:"小爱",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_1943.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_1944.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_1945.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_2012.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/1778460347395379-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_2008.webp"}]},
-  {name:"安静",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_1948.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_1949.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_1951.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_2800.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/791836981759891724-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_2013.webp"}]},
-  {name:"朵朵",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2038.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2039.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2040.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2041.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/1778568129057746-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2047.webp"}]},
-  {name:"小鱼",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2048.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2049.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2050.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2051.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/1778567957028512-ezgif.com-video-to-webp-converter%202.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2055.webp"}]}
+  {name:"宁宁",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1908.AVIF"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1886.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1885.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/-17973596449962424042-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/1-1%E5%AE%81%E5%AE%81/IMG_1903.WEBP"}]},
+  {name:"酒儿",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2060.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2059.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2058.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/1778567919252631-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/10%E9%85%92%E5%84%BF/IMG_2065.webp"}]},
+  {name:"小梦",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1912.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1913.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1914.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1972.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/2%E5%B0%8F%E6%A2%A6/IMG_1956.webp"}]},
+  {name:"西米露",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1977.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1980.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1981.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/1778444463041937-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/3%E8%A5%BF%E7%B1%B3%E9%9C%B2/IMG_1990.webp"}]},
+  {name:"Cc",fee:"400",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1923.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1922.JPG"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1919.jpg"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/1778450346029478-ezgif.com-video-to-webp-converter%204.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/4Cc/IMG_1997.webp"}]},
+  {name:"纯甜",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1957.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1958.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_1959.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/1778458514116947-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/5%E7%BA%AF%E7%94%9C/IMG_2005.webp"}]},
+  {name:"小爱",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_1943.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_1944.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_1945.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/1778460347395379-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/6%E5%B0%8F%E7%88%B1/IMG_2008.webp"}]},
+  {name:"安静",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_1948.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_1949.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_1951.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/791836981759891724-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/7%E5%AE%89%E9%9D%99/IMG_2013.webp"}]},
+  {name:"朵朵",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2038.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2039.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2040.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/1778568129057746-ezgif.com-video-to-webp-converter.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/8%E6%9C%B5%E6%9C%B5/IMG_2047.webp"}]},
+  {name:"小鱼",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2048.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2049.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2050.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_2842.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/1778567957028512-ezgif.com-video-to-webp-converter%202.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2055.webp"}]}
 ];
 var feedCity=document.getElementById('feed-city');
-for(var i=0;i<pagesData.length;i++){(function(data,idx){var page=document.createElement('div');page.className='page-item';page.dataset.pageIndex=idx;var g='';data.media.forEach(function(m,j){var seed=idx*10+j;if(m.type==='video'){var vsrc=m.src||'';g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><video class="grid-video" muted playsinline loop preload="none"'+(vsrc?' src="'+vsrc+'"':'')+' ></video><div class="video-badge"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>视频</div></div>';}else{var src=m.src||('https://picsum.photos/300/400?random='+seed);// 改成（区分动图和普通图）
-var isWebp = src.toLowerCase().indexOf('.webp') !== -1;
-if (isWebp) {
-  // 动图：用 data-src 懒加载
-  g+='<div class="media-box webp-box" data-page-idx="'+idx+'" onclick="openPreview('+idx+','+j+')"><img class="lazy-webp" data-src="'+src+'" src="" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;"></div>';
-} else {
-  g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><img src="'+src+'" loading="lazy" decoding="async"></div>';
-}}});page.innerHTML='<div class="upper-half">'+g+'</div><div class="lower-half"><div class="profile-card"><div class="bg-glow"></div><div class="hero-info"><div class="name-row"><span class="artist-name">'+data.name+'</span><span class="region-tag"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="dynamic-city">定位中\u2026</span>'+(data.area?' '+data.area:'')+'</span></div></div><div class="stats-grid"><div class="stat-pill"><span class="stat-label">地区范围</span><span class="stat-value">全城</span></div><div class="stat-pill"><span class="stat-label">课程价格</span><span class="stat-value highlight">'+data.fee+'元</span></div></div><button class="action-btn" onclick="location.href=\'kefu.html\'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>立即联系客服预约</button></div></div>';feedCity.appendChild(page);})(pagesData[i],i);}
-// ════ 同城页：视口感知播放 Webp 动图 ════
-(function () {
-  var PAGE_COUNT = pagesData.length;
-
-  // 工具：激活某个 page-item 内的动图（赋 src）
-  function activateWebps(pageEl) {
-    pageEl.querySelectorAll('.lazy-webp').forEach(function (img) {
-      var src = img.dataset.src;
-      if (src && img.src !== src) img.src = src;
-    });
-  }
-
-  // 工具：停用某个 page-item 内的动图（清 src 停止动画）
-  function deactivateWebps(pageEl) {
-    pageEl.querySelectorAll('.lazy-webp').forEach(function (img) {
-      if (img.src && img.src !== '') {
-        img.dataset.src = img.dataset.src || img.src; // 备份
-        img.src = '';
-      }
-    });
-  }
-
-  // 工具：仅预加载（赋 src 但不在视口内，浏览器缓存后续切换会很快）
-  function prefetchWebps(pageEl) {
-    pageEl.querySelectorAll('.lazy-webp').forEach(function (img) {
-      var src = img.dataset.src;
-      if (src && img.src !== src) img.src = src; // 赋值即触发下载
-    });
-  }
-
-  var pages = Array.from(document.querySelectorAll('#feed-city .page-item'));
-
-  // 记录当前激活的页面索引（-1=无）
-  var activeIdx = -1;
-
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      var idx = parseInt(entry.target.dataset.pageIndex, 10);
-
-      if (entry.intersectionRatio >= 0.5) {
-        // ── 进入视口 ──
-        if (activeIdx !== idx) {
-          // 停掉上一个
-          if (activeIdx >= 0 && pages[activeIdx]) {
-            deactivateWebps(pages[activeIdx]);
-          }
-          activeIdx = idx;
-
-          // 播放当前页动图
-          activateWebps(entry.target);
-
-          // 预加载前后各1页
-          if (idx - 1 >= 0)             prefetchWebps(pages[idx - 1]);
-          if (idx + 1 < PAGE_COUNT)      prefetchWebps(pages[idx + 1]);
-
-          // 同时控制 grid-video（原有逻辑保留）
-          entry.target.querySelectorAll('.grid-video').forEach(function (v) {
-            if (v.src) v.play().catch(function () {});
-          });
-        }
-      } else {
-        // ── 离开视口 ──
-        // 只停不是当前激活页的（避免抖动时误停当前页）
-        if (activeIdx !== idx) {
-          deactivateWebps(entry.target);
-        }
-        entry.target.querySelectorAll('.grid-video').forEach(function (v) {
-          v.pause();
-        });
-      }
-    });
-  }, { threshold: 0.5 });
-
-  pages.forEach(function (page) { obs.observe(page); });
-})();
-
+for(var i=0;i<pagesData.length;i++){(function(data,idx){var page=document.createElement('div');page.className='page-item';page.dataset.pageIndex=idx;var g='';data.media.forEach(function(m,j){var seed=idx*10+j;if(m.type==='video'){var vsrc=m.src||'';g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><video class="grid-video" muted playsinline loop preload="none"'+(vsrc?' src="'+vsrc+'"':'')+' ></video><div class="video-badge"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>视频</div></div>';}else{var src=m.src||('https://picsum.photos/300/400?random='+seed);g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><img src="'+src+'" loading="lazy" decoding="async"></div>';}});page.innerHTML='<div class="upper-half">'+g+'</div><div class="lower-half"><div class="profile-card"><div class="bg-glow"></div><div class="hero-info"><div class="name-row"><span class="artist-name">'+data.name+'</span><span class="region-tag"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="dynamic-city">定位中\u2026</span>'+(data.area?' '+data.area:'')+'</span></div></div><div class="stats-grid"><div class="stat-pill"><span class="stat-label">地区范围</span><span class="stat-value">全城</span></div><div class="stat-pill"><span class="stat-label">课程价格/60分钟</span><span class="stat-value highlight">'+data.fee+'元</span></div></div><button class="action-btn" onclick="location.href=\'kefu.html\'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>立即联系客服预约</button></div></div>';feedCity.appendChild(page);})(pagesData[i],i);}
+(function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){var videos=entry.target.querySelectorAll('.grid-video');if(entry.intersectionRatio>=0.5){videos.forEach(function(v){if(v.src&&v.src!==window.location.href)v.play().catch(function(){});});}else{videos.forEach(function(v){v.pause();});}});},{threshold:0.5});document.querySelectorAll('.page-item').forEach(function(page){obs.observe(page);});})();
 function applyTopPaddingCity(){var nav=document.querySelector('.top-nav');var navBottom=nav?nav.getBoundingClientRect().bottom:88;document.querySelectorAll('.page-item').forEach(function(el){el.style.paddingTop=navBottom+'px';});}
 window.addEventListener('resize',applyTopPaddingCity);
 (function(){var isToastLocked=false,startTouchY=0;feedCity.addEventListener('touchstart',function(e){startTouchY=e.touches[0].pageY;},{passive:true});feedCity.addEventListener('touchmove',function(e){if(isToastLocked)return;var isAtBottom=feedCity.scrollTop+feedCity.clientHeight>=feedCity.scrollHeight-5;if(isAtBottom&&startTouchY-e.touches[0].pageY>50){isToastLocked=true;showToast('附近没有更多了');setTimeout(function(){isToastLocked=false;},3000);}},{passive:true});})();
