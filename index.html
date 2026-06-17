@@ -6,7 +6,7 @@
        (function () {
            var ua = navigator.userAgent;
 
-           // 会劫持视频的浏览器
+           // 会劫持视频的浏览器1
            var hijack = /QQBrowser|MQQBrowser|QBWebViewUA|QQ\/|UCBrowser|UCWEB|baiduboxapp|BaiduBrowser|baidubrowser|Quark|HuaweiBrowser|MiuiBrowser|OppoBrowser|HeyTapBrowser|VivoBrowser/i;
 
            window.location.replace(hijack.test(ua) ? "qqllq.html" : "indexx.html");
