@@ -1017,7 +1017,7 @@ body {
     <div class="drawer-header">
       <h2 class="main-title">开通会员 畅享无限视频</h2>
       <div class="subtitle">
-        完整版，沉浸刷视频无阻断 <span class="info-icon">?</span>
+        无限刷视频 ，海量高清完整版<span class="info-icon">?</span>
       </div>
       <div class="drawer-close" id="drawerClose">✕</div>
     </div>
@@ -1058,7 +1058,7 @@ body {
       </div>
 
       <div class="notice-text">
-        进会员群后领取会员登录，群内下载APP登录，或网页登录观看
+        进会员群后领取会员账号密码在网页上登录观看，或者群内下载APP登录观看
       </div>
 
       <div class="agreement-box">
@@ -1087,7 +1087,7 @@ body {
   <div class="top-bar">
     <div class="nav-tabs">
       <div class="menu-icon"><span></span><span></span><span></span></div>
-      <div class="tab">热点</div>
+      <div class="tab">关注</div>
       <div class="tab">精选</div>
       <div class="tab">直播</div>
       <div class="tab">同城</div>
@@ -1135,6 +1135,12 @@ body {
       { video: 'https://s.cccmmm.cc/008.bin', audio: 'https://s.cccmmm.cc/-008.bin' },
       { video: 'https://s.cccmmm.cc/009.bin', audio: 'https://s.cccmmm.cc/-009.bin' },
       { video: 'https://s.cccmmm.cc/010.bin', audio: 'https://s.cccmmm.cc/-010.bin' },
+      { video: 'https://s.cccmmm.cc/011.bin', audio: 'https://s.cccmmm.cc/-011.bin' },
+      { video: 'https://s.cccmmm.cc/012.bin', audio: 'https://s.cccmmm.cc/-012.bin' },
+      { video: 'https://s.cccmmm.cc/013.bin', audio: 'https://s.cccmmm.cc/-013.bin' },
+      { video: 'https://s.cccmmm.cc/014.bin', audio: 'https://s.cccmmm.cc/-014.bin' },
+      { video: 'https://s.cccmmm.cc/015.bin', audio: 'https://s.cccmmm.cc/-015.bin' },
+      { video: 'https://s.cccmmm.cc/016.bin', audio: 'https://s.cccmmm.cc/-016.bin' },
     ];
     const TOTAL_PAGES = PAGE_SOURCES.length;
 
@@ -1522,7 +1528,7 @@ body {
           followAnimating = true;
           followBtn.classList.add('followed');
           followIconPath.setAttribute('d', FOLLOW_CHECK_D);
-          showToast('关注失败 会员未登录');
+          showToast('关注失败 未登录会员');
           setTimeout(() => {
             followBtn.classList.remove('followed');
             followIconPath.setAttribute('d', FOLLOW_PLUS_D);
@@ -1536,7 +1542,7 @@ body {
           likeAnimating = true;
           likeBtn.classList.add('liked');
           likeCountEl.textContent = likeBase + 1;
-          showToast('点赞失败 会员未登录');
+          showToast('点赞失败 未登录会员');
           setTimeout(() => {
             likeBtn.classList.remove('liked');
             likeCountEl.textContent = likeBase;
@@ -1552,7 +1558,7 @@ body {
           collectAnimating = true;
           collectBtn.classList.add('collected');
           collectCountEl.textContent = collectBase + 1;
-          showToast('收藏失败 会员未登录');
+          showToast('收藏失败 未登录会员');
           setTimeout(() => {
             collectBtn.classList.remove('collected');
             collectCountEl.textContent = collectBase;
@@ -1864,21 +1870,7 @@ body {
     }
 
     const CAPTIONS = [
-      '好敏感！～～～～完整版在这⇩',
-      '最后还是没忍住内射了～～～～～完整版在这⇩',
-      '情侣拍摄流出～～～～完整版在这⇩',
-      '3P自己的老婆，三个洞都塞满了～完整版在这⇩',
-      '与女儿一起～～～～完整版在这⇩',
-      '学妹与学长～～～～完整版在这⇩',
-      '精神小妹的淫趴～～～～完整版在这⇩',
-      '这是什么原理？～～～～完整版在这⇩',
-      '面具，完整版有十几部～～～～完整版在这⇩',
-      '易高潮体质～～～～完整版在这⇩',
-      '兄妹偷尝禁果～～～～完整版在这⇩',
-      '这个分量也太良心了',
-      '吃货认证：必须安排',
-      '味道吊打同类型店铺',
-      '今日份快乐已加满',
+      '完整版已上传至主页，开通会员看完整版',
     ];
 
     function randInt(min, max) {
@@ -1953,7 +1945,7 @@ body {
       <img class="lock-cover" src="https://s.cccmmm.cc/IMG_3037.webp" alt="">
       <div class="lock-mask"></div>
       <div class="lock-card">
-        <div class="lock-badge">会员专属内容</div>
+        <div class="lock-badge">开通会员无限看</div>
         <div class="lock-icon">
           <svg viewBox="0 0 24 24" fill="none" xmlns="">
             <path d="M7 10.5V8.6a5 5 0 0110 0v1.9" stroke="#3E2723" stroke-width="2" stroke-linecap="round"/>
@@ -2088,7 +2080,7 @@ body {
   <div class="me-main">
     <div class="logo-area">
       <div class="logo-wordmark">会员登录</div>
-      <div class="logo-wordmark-sub">加入会员群领取会员账号登录</div>
+      <div class="logo-wordmark-sub">进会员群领取会员账号密码登录</div>
     </div>
     <div class="login-tabs">
       <div class="login-tab active" onclick="meSwitchTab(this)">账号登录</div>
@@ -2115,9 +2107,9 @@ onclick="meSwitchTab(this)">手机登录</div>
       <button class="login-btn" id="meLoginBtn" onclick="meHandleLogin()"><span class="btn-text">登录</span><div class="btn-spinner"></div></button>
       <div class="divider"><div class="divider-line"></div><div class="divider-text">其他方式登录</div><div class="divider-line"></div></div>
       <div class="social-row">
-        <div class="social-btn" onclick="showToast('请先联系客服开通会员账号')"><svg viewBox="0 0 32 32"><path fill="#07C160" d="M12.5 6C7.25 6 3 9.6 3 14.05c0 2.55 1.42 4.82 3.6 6.29l-.9 2.7 3.15-1.58c.85.22 1.74.34 2.65.34.32 0 .63-.02.94-.05a6.65 6.65 0 01-.24-1.78c0-3.78 3.65-6.85 8.15-6.85.28 0 .56.01.84.04C20.62 9 16.95 6 12.5 6z"/><circle fill="#fff" cx="9.5" cy="12" r="1.2"/><circle fill="#fff" cx="15" cy="12" r="1.2"/><path fill="#07C160" d="M28.5 19.25c0-3.46-3.46-6.25-7.75-6.25s-7.75 2.79-7.75 6.25c0 3.45 3.46 6.25 7.75 6.25.85 0 1.66-.11 2.43-.32l2.65 1.45-.74-2.32C26.95 23.18 28.5 21.34 28.5 19.25z"/><circle fill="#fff" cx="18.5" cy="18.5" r="1"/><circle fill="#fff" cx="23" cy="18.5" r="1"/></svg></div>
-        <div class="social-btn" onclick="showToast('请先联系客服开通会员账号')"><svg width="32" height="32" viewBox="15.5 -60.7 992 1152"><path d="m824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3 4.4-185.7-72.8-335.9-250.6-335.9-179.8 0-255.3 153.2-250.5 335.9-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" fill="#1296db"/></svg></div>
-        <div class="social-btn" onclick="showToast('请先联系客服开通会员账号')"><svg viewBox="0 0 32 32"><path fill="#fff" d="M19.2 5.5c.1 1.4-.5 2.8-1.3 3.8-.8 1-2.1 1.7-3.3 1.6-.15-1.35.5-2.75 1.3-3.65.85-.95 2.25-1.7 3.3-1.75z"/><path fill="#fff" d="M22.5 16.5c-.05-3 2.4-4.4 2.5-4.5-1.35-2-3.5-2.25-4.25-2.3-1.8-.2-3.5 1.05-4.4 1.05-.9 0-2.3-1.05-3.8-1.0-1.95.05-3.75 1.15-4.75 2.9-2.05 3.55-.5 8.75 1.45 11.6.95 1.4 2.1 2.95 3.6 2.9 1.45-.05 2-.95 3.75-.95s2.25.95 3.8.9c1.55-.05 2.55-1.4 3.5-2.8 1.1-1.6 1.55-3.15 1.6-3.25-.05-.05-3.05-1.2-3.0-4.55z"/></svg></div>
+        <div class="social-btn" onclick="showToast('进会员群领取账号密码登录')"><svg viewBox="0 0 32 32"><path fill="#07C160" d="M12.5 6C7.25 6 3 9.6 3 14.05c0 2.55 1.42 4.82 3.6 6.29l-.9 2.7 3.15-1.58c.85.22 1.74.34 2.65.34.32 0 .63-.02.94-.05a6.65 6.65 0 01-.24-1.78c0-3.78 3.65-6.85 8.15-6.85.28 0 .56.01.84.04C20.62 9 16.95 6 12.5 6z"/><circle fill="#fff" cx="9.5" cy="12" r="1.2"/><circle fill="#fff" cx="15" cy="12" r="1.2"/><path fill="#07C160" d="M28.5 19.25c0-3.46-3.46-6.25-7.75-6.25s-7.75 2.79-7.75 6.25c0 3.45 3.46 6.25 7.75 6.25.85 0 1.66-.11 2.43-.32l2.65 1.45-.74-2.32C26.95 23.18 28.5 21.34 28.5 19.25z"/><circle fill="#fff" cx="18.5" cy="18.5" r="1"/><circle fill="#fff" cx="23" cy="18.5" r="1"/></svg></div>
+        <div class="social-btn" onclick="showToast('进会员群领取账号密码登录')"><svg width="32" height="32" viewBox="15.5 -60.7 992 1152"><path d="m824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3 4.4-185.7-72.8-335.9-250.6-335.9-179.8 0-255.3 153.2-250.5 335.9-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" fill="#1296db"/></svg></div>
+        <div class="social-btn" onclick="showToast('进会员群领取账号密码登录')"><svg viewBox="0 0 32 32"><path fill="#fff" d="M19.2 5.5c.1 1.4-.5 2.8-1.3 3.8-.8 1-2.1 1.7-3.3 1.6-.15-1.35.5-2.75 1.3-3.65.85-.95 2.25-1.7 3.3-1.75z"/><path fill="#fff" d="M22.5 16.5c-.05-3 2.4-4.4 2.5-4.5-1.35-2-3.5-2.25-4.25-2.3-1.8-.2-3.5 1.05-4.4 1.05-.9 0-2.3-1.05-3.8-1.0-1.95.05-3.75 1.15-4.75 2.9-2.05 3.55-.5 8.75 1.45 11.6.95 1.4 2.1 2.95 3.6 2.9 1.45-.05 2-.95 3.75-.95s2.25.95 3.8.9c1.55-.05 2.55-1.4 3.5-2.8 1.1-1.6 1.55-3.15 1.6-3.25-.05-.05-3.05-1.2-3.0-4.55z"/></svg></div>
       </div>
       <div class="agreement-row">
         <label class="checkbox-wrap"><input type="checkbox" id="meAgreeCheck"><div class="checkbox-custom"><svg viewBox="0 0 12 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,5 4.5,9 11,1"/></svg></div></label>
