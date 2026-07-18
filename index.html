@@ -733,6 +733,105 @@ body {
       font-size: 11.5px;
     }
 
+/* ════════ 单条视频结尾付费墙（播放至最后0.5秒触发） ════════ */
+    .page.locked canvas {
+      filter: blur(22px) brightness(0.55) saturate(1.05);
+      transform: scale(1.08); /* 避免模糊后露出画布边缘 */
+    }
+    .page.locked .tap-layer { cursor: default; }
+    .page.locked .center-play { display: none !important; }
+
+    .paywall-overlay {
+      position: absolute; inset: 0;
+      z-index: 20;
+      display: none;
+      align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .page.locked .paywall-overlay { display: flex; }
+
+    .paywall-content {
+      width: min(78%, 280px);
+      display: flex; flex-direction: column; align-items: center;
+      transform: translateY(-0%);
+    }
+
+    .paywall-card {
+      pointer-events: auto;
+      width: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      padding: 26px 22px 22px;
+      border-radius: 22px;
+      background: rgba(15, 15, 15, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      opacity: 0;
+      animation: paywallIn .32s ease forwards;
+    }
+    @keyframes paywallIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .paywall-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1.5px solid rgba(254, 44, 85, 0.55);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 6px rgba(254, 44, 85, 0.1), 0 8px 20px rgba(0,0,0,0.45);
+      margin-bottom: 14px;
+    }
+    .paywall-icon svg { width: 25px; height: 25px; }
+
+    .paywall-title { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .paywall-sub { color: rgba(255,255,255,0.55); font-size: 12.5px; line-height: 1.55; margin-bottom: 20px; }
+
+    .paywall-btns { display: flex; gap: 10px; width: 100%; }
+    .pw-btn {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      height: 40px;
+      border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: opacity .15s ease;
+    }
+    .pw-btn:active { opacity: .75; }
+    .pw-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .pw-btn.pw-retry {
+      background: rgba(255,255,255,0.1);
+      border: 0.6px solid rgba(255,255,255,0.35);
+      color: #fff;
+    }
+    .pw-btn.pw-vip {
+      background: linear-gradient(90deg, #fe2c55, #ff4d6d);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(254, 44, 85, 0.35);
+    }
+
+    /* 卡片下方：上滑浏览下一页 */
+    .paywall-swipe {
+      pointer-events: auto;
+      margin-top: 36px;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      cursor: pointer;
+    }
+    .paywall-swipe .swipe-arrow {
+      width: 20px; height: 20px;
+      animation: swipeBounce 1.5s ease-in-out infinite;
+    }
+    .paywall-swipe span {
+      color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500;
+    }
+    @keyframes swipeBounce {
+      0%, 100% { transform: translateY(0); opacity: .45; }
+      50%      { transform: translateY(-6px); opacity: 1; }
+    }
+
     /═商品详情抽屉（已注入全新会员设计）═ */
     .drawer-mask {
       position: fixed; inset: 0;
@@ -1017,7 +1116,7 @@ body {
     <div class="drawer-header">
       <h2 class="main-title">开通会员 畅享无限视频</h2>
       <div class="subtitle">
-        无限刷视频 ，解锁全部完整版<span class="info-icon">?</span>
+        无限刷视频 ，解锁全部高清完整版<span class="info-icon">?</span>
       </div>
       <div class="drawer-close" id="drawerClose">✕</div>
     </div>
@@ -1468,6 +1567,12 @@ body {
         this.muteHintEl = pageEl.querySelector('.mute-hint');
         this.muteHintTimer = null;
 
+        this.locked = false;
+        this.paywallOverlayEl = pageEl.querySelector('.paywall-overlay');
+        this.retryBtn = pageEl.querySelector('.pw-retry');
+        this.vipBtn = pageEl.querySelector('.pw-vip');
+        this.swipeNextEl = pageEl.querySelector('.paywall-swipe');
+
         this.frames = [];
         this.playing = false;
         this.playStart = 0;
@@ -1499,6 +1604,61 @@ body {
 
         this.bindSidebarActions();
         this.bindMuteHint();
+        this.bindPaywallActions();
+      }
+
+bindPaywallActions() {
+  if (this.retryBtn) {
+    this.retryBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.retryFromStart();
+    });
+  }
+  if (this.vipBtn) {
+    this.vipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      ProductDrawer.open();
+    });
+  }
+  if (this.swipeNextEl) {
+    this.swipeNextEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.goToNextPage();
+    });
+  }
+}
+
+lockPaywall() {
+        if (this.locked) return;
+        this.locked = true;
+        this.playing = false;
+        this.stopAudioNode();
+        this.hideMuteHint();
+        this.centerPlayBtn.style.display = 'none';
+        if (this.discEl) this.discEl.classList.remove('spinning');
+        this.pageEl.classList.add('locked');
+      }
+
+      retryFromStart() {
+        if (!this.active) return;
+        this.locked = false;
+        this.pageEl.classList.remove('locked');
+        this.flushFrames();
+        this.closeDecoder();
+        this.pausedTime = 0;
+        this.playing = true;
+        this.playStart = performance.now();
+        this.openDecoder();
+        this.feedSamplesThrottled();
+        this.stopAudioNode();
+        this.startAudioNode(0);
+        this.centerPlayBtn.style.display = 'none';
+        if (this.discEl) this.discEl.classList.add('spinning');
+      }
+
+      goToNextPage() {
+        const nextEl = this.pageEl.nextElementSibling;
+        if (nextEl) nextEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
       bindSidebarActions() {
@@ -1722,6 +1882,23 @@ body {
           }
         }
 
+if (!this.locked && this.duration > 1) {
+  const lockAt = this.duration - 0.5;
+  if (now >= lockAt) {
+    now = lockAt;
+    this.pausedTime = lockAt;
+    if (this.frames.length) {
+      while (this.frames.length > 1 && this.frames[1].ts <= now) {
+        this.frames.shift().frame.close();
+      }
+      const lf = this.frames[0];
+      if (lf) this.ctx.drawImage(lf.frame, 0, 0);
+    }
+    this.lockPaywall();
+    return;
+  }
+}
+
         if (this.duration && now >= this.duration) { this.loopPlayback(); return; }
         if (this.frames.length === 0) return;
         while (this.frames.length > 1 && this.frames[1].ts <= now) {
@@ -1754,7 +1931,7 @@ body {
       }
 
       togglePlay() {
-        if (!this.active) return;
+        if (!this.active || this.locked) return;
         if (this.playing) {
           this.playing = false;
           this.pausedTime = (performance.now() - this.playStart) / 1000;
@@ -1828,6 +2005,8 @@ body {
         this.flushFrames();
         this.closeDecoder();
 
+        this.locked = false;
+        this.pageEl.classList.remove('locked');
         this.pausedTime = 0;
         this.playing = true;
         this.playStart = performance.now();
@@ -1854,6 +2033,8 @@ body {
         this.pausedTime = 0;
         this.hideMuteHint();
         if (this.discEl) this.discEl.classList.remove('spinning');
+this.locked = false;
+this.pageEl.classList.remove('locked');
         this.pageEl.classList.remove('is-active');
       }
 
@@ -1869,8 +2050,24 @@ body {
       }
     }
 
-    const CAPTIONS = [
-      '完整版已上传至主页，开通会员观看完整版',
+const CAPTIONS = [
+      '都不避着点人了',
+      '最后还是忍不住内射了～',
+      '情侣',
+      '三P自己的妹妹，三个洞都塞满了',
+      '鄂州父女',
+      '学妹与学长',
+      '精神小妹的淫趴',
+      '边日边喷奶',
+      '面具，完整版有好几部',
+      '敏感易高潮',
+      '初尝禁果',
+      '父亲与两个女儿的性福生活',
+      '奔驰哥',
+      '天上飞机最快，地上眼镜最骚',
+      '台湾的学生妹',
+      '这个我是真喜欢',
+      '深喉',
     ];
 
     function randInt(min, max) {
@@ -1893,6 +2090,35 @@ body {
         <canvas></canvas>
         <div class="tap-layer"></div>
         <div class="center-play"><svg viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.55)" d="M8,7 L8,17 Q8,19 9.69,17.93 L17.31,13.07 Q19,12 17.31,10.93 L9.69,6.07 Q8,5 8,7 Z"/></svg></div>
+        <div class="paywall-overlay">
+          <div class="paywall-content">
+            <div class="paywall-card">
+              <div class="paywall-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10.5V8.6a5 5 0 0110 0v1.9" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                  <rect x="5" y="10.5" width="14" height="9.5" rx="3" fill="#fe2c55"/>
+                  <circle cx="12" cy="15" r="1.6" fill="#fff"/>
+                </svg>
+              </div>
+              <div class="paywall-title">试看结束</div>
+              <div class="paywall-sub">开通会员观看高清完整版</div>
+              <div class="paywall-btns">
+                <div class="pw-btn pw-retry">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                  重新试看
+                </div>
+                <div class="pw-btn pw-vip">
+                  <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5l4 2.8L12 5l5 6.3 4-2.8-1.6 9.5H4.6L3 8.5z"/><circle cx="3" cy="8" r="1.4"/><circle cx="12" cy="4.4" r="1.4"/><circle cx="21" cy="8" r="1.4"/></svg>
+                  开通会员
+                </div>
+              </div>
+            </div>
+            <div class="paywall-swipe">
+              <svg class="swipe-arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+              <span>上滑观看下一个视频</span>
+            </div>
+          </div>
+        </div>
         <div class="page-overlay">
           <div class="status">正在加载...</div>
           <div class="bar-wrap"><div class="bar-fill"></div></div>
@@ -2201,7 +2427,7 @@ function switchPage(pageId){
     if(window.homeFeedResume){window.homeFeedResume();}}
   else if(pageId==='me'){topNav.style.display='none';maskTop.style.display='none';}
   else{topNavTabs.style.display='none';topNavTitle.style.display='block';topNav.style.display='flex';maskTop.style.display='block';
-    if(pageId==='message')topNavTitle.innerText='消息通知';else if(pageId==='city')topNavTitle.innerText='同城发现';
+    if(pageId==='message')topNavTitle.innerText='消息通知';else if(pageId==='city')topNavTitle.innerText='同城附近';
     applyTopPaddingCity();}
   currentPage=pageId;
   
@@ -2220,7 +2446,7 @@ var pagesData=[
   {name:"小鱼",fee:"600",area:"",media:[{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2048.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2049.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2050.webp"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/IMG_2055.webp"},{type:"webp",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/9%E5%B0%8F%E9%B1%BC/1778567957028512-ezgif.com-video-to-webp-converter%202.webp", poster:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/%E5%B0%8F%E9%B1%BC%E9%A6%96%E5%B8%A7.WEBP"},{type:"image",src:"https://pub-d3dc6ac30bca4ee7a023357c8640e431.r2.dev/IMG_3193.webp"}]}
 ];
 var feedCity=document.getElementById('feed-city');
-for(var i=0;i<pagesData.length;i++){(function(data,idx){var page=document.createElement('div');page.className='page-item';page.dataset.pageIndex=idx;var g='';data.media.forEach(function(m,j){var seed=idx*10+j;if(m.type==='video'){var vsrc=m.src||'';g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><video class="grid-video" muted playsinline loop preload="none"'+(vsrc?' src="'+vsrc+'"':'')+' ></video><div class="video-badge"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>测试</div></div>';}else if(m.type==='webp'){var animSrc=m.src||'';var posterSrc=m.poster||animSrc;g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><img class="grid-webp" data-anim-src="'+animSrc+'" data-poster-src="'+posterSrc+'" src="'+posterSrc+'" loading="lazy" decoding="async"><div class="video-badge"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div></div>';}else{var src=m.src||('https://picsum.photos/300/400?random='+seed);g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><img src="'+src+'" loading="lazy" decoding="async"></div>';}});page.innerHTML='<div class="upper-half">'+g+'</div><div class="lower-half"><div class="profile-card"><div class="bg-glow"></div><div class="hero-info"><div class="name-row"><span class="artist-name">'+data.name+'</span><span class="region-tag"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="dynamic-city">空白</span>'+(data.area?' '+data.area:'')+'</span></div></div><div class="stats-grid"><div class="stat-pill"><span class="stat-label">地区范围</span><span class="stat-value">全城可约</span></div><div class="stat-pill"><span class="stat-label">课程价格/60分钟不限次</span><span class="stat-value highlight">'+data.fee+'元</span></div></div><button class="action-btn" onclick="location.href=\'kefu.html\'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>立即联系客服预约她</button></div></div>';feedCity.appendChild(page);})(pagesData[i],i);}
+for(var i=0;i<pagesData.length;i++){(function(data,idx){var page=document.createElement('div');page.className='page-item';page.dataset.pageIndex=idx;var g='';data.media.forEach(function(m,j){var seed=idx*10+j;if(m.type==='video'){var vsrc=m.src||'';g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><video class="grid-video" muted playsinline loop preload="none"'+(vsrc?' src="'+vsrc+'"':'')+' ></video><div class="video-badge"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>测试</div></div>';}else if(m.type==='webp'){var animSrc=m.src||'';var posterSrc=m.poster||animSrc;g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><img class="grid-webp" data-anim-src="'+animSrc+'" data-poster-src="'+posterSrc+'" src="'+posterSrc+'" loading="lazy" decoding="async"><div class="video-badge"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div></div>';}else{var src=m.src||('https://picsum.photos/300/400?random='+seed);g+='<div class="media-box" onclick="openPreview('+idx+','+j+')"><img src="'+src+'" loading="lazy" decoding="async"></div>';}});page.innerHTML='<div class="upper-half">'+g+'</div><div class="lower-half"><div class="profile-card"><div class="bg-glow"></div><div class="hero-info"><div class="name-row"><span class="artist-name">'+data.name+'</span><span class="region-tag"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="dynamic-city">空白</span>'+(data.area?' '+data.area:'')+'</span></div></div><div class="stats-grid"><div class="stat-pill"><span class="stat-label">地区范围</span><span class="stat-value">全城可约</span></div><div class="stat-pill"><span class="stat-label">价格/一小时不限次</span><span class="stat-value highlight">'+data.fee+'元</span></div></div><button class="action-btn" onclick="location.href=\'kefu.html\'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>立即联系客服预约她</button></div></div>';feedCity.appendChild(page);})(pagesData[i],i);}
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){var videos=entry.target.querySelectorAll('.grid-video');var webps=entry.target.querySelectorAll('.grid-webp');if(entry.intersectionRatio>=0.5){videos.forEach(function(v){if(v.src&&v.src!==window.location.href)v.play().catch(function(){});});webps.forEach(function(img){var a=img.dataset.animSrc;if(a&&img.src!==a)img.src=a;});}else{videos.forEach(function(v){v.pause();});webps.forEach(function(img){var p=img.dataset.posterSrc;if(p&&img.src!==p)img.src=p;});}});},{threshold:0.5});document.querySelectorAll('.page-item').forEach(function(page){obs.observe(page);});})();
 function applyTopPaddingCity(){var nav=document.querySelector('.top-nav');var navBottom=nav?nav.getBoundingClientRect().bottom:88;document.querySelectorAll('.page-item').forEach(function(el){el.style.paddingTop=navBottom+'px';});}
 window.addEventListener('resize',applyTopPaddingCity);
