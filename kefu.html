@@ -145,7 +145,7 @@
      ══════════════════════════════════════════════════════════ -->
 <script>
 // ── 后端地址（与 WebSocket 保持一致）──────────────────────
-const SERVER_BASE = 'page-production-49f9.up.railway.app';
+const SERVER_BASE = 'https://page-production-49f9.up.railway.app';
 
 // ── 全局状态 ─────────────────────────────────────────────
 let myId = '';          // WebSocket 展示用 ID（随机短串，保持现有逻辑）
@@ -329,7 +329,7 @@ function isConnected() {
 }
 
 function connect() {
-    ws = new WebSocket('wss://page-c4hm.onrender.com'); 
+    ws = new WebSocket('wss://page-production-49f9.up.railway.app'); 
     
     ws.onopen = () => {
         statusBar.innerText = "已连接";
