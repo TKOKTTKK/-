@@ -1,9 +1,28 @@
-<script>
-var ua = navigator.userAgent.toLowerCase();
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>正在跳转...</title>
 
-if (ua.includes("ucbrowser")) {
-    location.href = "./uc.html";
-} else {
-    location.href = "./indexx.html";
-}
+<script>
+(function () {
+
+    var ua = navigator.userAgent;
+
+    // 检测 UC 浏览器
+    if (/UCBrowser|UCWEB|UCWEB/i.test(ua)) {
+        window.location.replace("uc.html");
+    } else {
+        window.location.replace("indexx.html");
+    }
+
+})();
 </script>
+
+</head>
+
+<body>
+正在跳转...
+</body>
+</html>
