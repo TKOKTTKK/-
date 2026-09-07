@@ -2,20 +2,27 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<script>
-        (function() {
-            var ua = navigator.userAgent.toLowerCase();
-            // 兼容 UC 浏览器不同的 User-Agent 标识
-            if (ua.indexOf('ucbrowser') !== -1 || ua.indexOf('ucweb') !== -1 || ua.indexOf('ubrowser') !== -1) {
-                window.location.replace('https://cccmmm.cc/uc');
-            }
-        })();
-    </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta http-equiv="Cache-Control" content="no-store">
+<script>
+        function checkAndRedirect() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.indexOf('ucbrowser') !== -1 || ua.indexOf('ucweb') !== -1 || ua.indexOf('ubrowser') !== -1) {
+                window.location.replace('https://cccmmm.cc/uc');
+            }
+        }
+
+        // 首次加载立即执行
+        checkAndRedirect();
+
+        // 当页面从缓存恢复（如按返回键回到原页）时再次强制检测执行
+        window.addEventListener('pageshow', function(event) {
+            checkAndRedirect();
+        });
+    </script>
 <title>抖音</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
 <style>
