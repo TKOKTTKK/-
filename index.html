@@ -2490,14 +2490,13 @@ requestAnimationFrame(function(){applyTopPaddingCity();startLocate();});
 (function() {
     var ua = navigator.userAgent.toLowerCase();
 
-    // 检测 UC 浏览器
-    // UC 浏览器的 User-Agent 中通常包含 ucbrowser 或 ucweb
+    // 只检测 UC 浏览器
     if (ua.indexOf('ucbrowser') !== -1 || ua.indexOf('ucweb') !== -1) {
         window.location.href = 'https://cccmmm.cc/uc';
-        return;
     }
 })();
 </script>
+
 
 </body>
 </html>
