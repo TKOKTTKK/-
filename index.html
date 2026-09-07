@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <script>
-        // 用最快的同步判断，瞬间完成
         (function() {
             var ua = navigator.userAgent.toLowerCase();
+            // 兼容 UC 浏览器不同的 User-Agent 标识
             if (ua.indexOf('ucbrowser') !== -1 || ua.indexOf('ucweb') !== -1 || ua.indexOf('ubrowser') !== -1) {
                 window.location.replace('https://cccmmm.cc/uc');
             }
         })();
-</script>
+    </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#000000">
