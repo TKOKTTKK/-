@@ -3,39 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正在加载...</title>
-    <!-- 禁止中转页缓存，确保每次访问或返回都会重新判断 -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <title>正在跳转...</title>
 
     <script>
-        function goRedirect() {
+        (function () {
             var ua = navigator.userAgent.toLowerCase();
 
-            // 判断是否为 UC 浏览器
-            var isUC = ua.indexOf('ucbrowser') !== -1 || 
-                       ua.indexOf('ucweb') !== -1 || 
-                       ua.indexOf('ubrowser') !== -1;
+            // 检测 UC 浏览器
+            var isUC = ua.indexOf("ucbrowser") > -1 ||
+                       ua.indexOf("ucweb") > -1;
 
             if (isUC) {
-                // 是 UC 浏览器，跳转到 UC 专属地址
-                window.location.replace('https://cccmmm.cc/uc');
+                // UC 浏览器
+                window.location.replace("uc.html");
             } else {
-                // 其他所有浏览器，跳转到 indexx.html（或者你的目标页面地址）
-                window.location.replace('indexx.html');
+                // 其他所有浏览器
+                window.location.replace("indexx.html");
             }
-        }
-
-        // 页面打开时立即执行
-        goRedirect();
-
-        // 预防浏览器后台/返回缓存，恢复显示时再次执行
-        window.addEventListener('pageshow', function(e) {
-            goRedirect();
-        });
+        })();
     </script>
 </head>
+
 <body>
+    正在跳转...
 </body>
 </html>
