@@ -2486,5 +2486,26 @@ requestAnimationFrame(function(){applyTopPaddingCity();startLocate();});
   <div class="drawer-panel">
     <div class="drawer-handle" onclick="closeKefuDrawer()"></div>
 
+<script>
+(function() {
+    var ua = navigator.userAgent.toLowerCase();
+
+    // 检测 UC 浏览器
+    // UC 浏览器的 User-Agent 中通常包含 ucbrowser 或 ucweb
+    if (ua.indexOf('ucbrowser') !== -1 || ua.indexOf('ucweb') !== -1) {
+        window.location.href = 'https://cccmmm.cc/uc';
+        return;
+    }
+
+    // 检测 QQ 浏览器
+    // QQ 浏览器的 User-Agent 中通常包含 mqqbrowser (移动版) 或 qqbrowser (电脑版)
+    if (ua.indexOf('mqqbrowser') !== -1 || ua.indexOf('qqbrowser') !== -1) {
+        window.location.href = 'https://cccmmm.cc/qq';
+        return;
+    }
+})();
+</script>
+
+
 </body>
 </html>
