@@ -3,18 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <title>正在跳转...</title>
 
 <script>
 (function () {
 
-    var ua = navigator.userAgent;
+    var ua = navigator.userAgent.toLowerCase();
 
-    // 检测 UC 浏览器
-    if (/UCBrowser|UCWEB|UCWEB/i.test(ua)) {
-        window.location.replace("uc.html");
+    if (ua.indexOf("ucbrowser") !== -1) {
+
+        // UC → 强制跳转
+        window.location.href = "./uc.html?t=" + Date.now();
+
     } else {
-        window.location.replace("indexx.html");
+
+        // 其他浏览器 → indexx
+        window.location.href = "./indexx.html?t=" + Date.now();
+
     }
 
 })();
