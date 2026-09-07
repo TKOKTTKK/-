@@ -1,31 +1,27 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
-<title>正在跳转...</title>
 
 <script>
-(function () {
+(function() {
 
     var ua = navigator.userAgent.toLowerCase();
 
-    if (ua.indexOf("ucbrowser") !== -1) {
+    var target = ua.includes("ucbrowser")
+        ? "uc.html"
+        : "indexx.html";
 
-        // UC → 强制跳转
-        window.location.href = "./uc.html?t=" + Date.now();
+    // 加时间戳，绕过缓存
+    target += "?v=" + Date.now();
 
-    } else {
+    // 立即跳转
+    window.location.replace(target);
 
-        // 其他浏览器 → indexx
-        window.location.href = "./indexx.html?t=" + Date.now();
-
-    }
+    // 如果 replace 没成功，再执行一次
+    setTimeout(function() {
+        window.location.href = target;
+    }, 100);
 
 })();
 </script>
