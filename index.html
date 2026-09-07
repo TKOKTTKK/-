@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正在跳转...</title>
+<script>
+var ua = navigator.userAgent.toLowerCase();
 
-    <script>
-        (function () {
-            var ua = navigator.userAgent.toLowerCase();
-
-            // 检测 UC 浏览器
-            var isUC = ua.indexOf("ucbrowser") > -1 ||
-                       ua.indexOf("ucweb") > -1;
-
-            if (isUC) {
-                // UC 浏览器
-                window.location.replace("uc.html");
-            } else {
-                // 其他所有浏览器
-                window.location.replace("indexx.html");
-            }
-        })();
-    </script>
-</head>
-
-<body>
-    正在跳转...
-</body>
-</html>
+if (ua.includes("ucbrowser")) {
+    location.href = "./uc.html";
+} else {
+    location.href = "./indexx.html";
+}
+</script>
